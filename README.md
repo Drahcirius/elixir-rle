@@ -33,6 +33,14 @@ iex> RLE.Bit.decode([7, 1, 64])
 <<1, 0, 0, 0, 0, 0, 0, 0, 0>>
 ```
 
+### Serializing encodings
+This library does not serialize the encodings to binary, so if the runs need to be serialized to binary for external storage use etf
+```elixir
+serialized = <<0 :: size(1000)>> |> RLE.Bit.encode() |> :erlang.term_to_binary
+
+unserialized = serialized |> :erlang.binary_to_term |> RLE.Bit.decode()
+```
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
